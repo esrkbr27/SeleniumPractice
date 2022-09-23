@@ -1,6 +1,11 @@
 package day04;
 
-public class Actions {
+import Utilities.TestBeforeAfter;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class Actions extends TestBeforeAfter {
     /*
     //Ödev 1
 //Yeni Class olusturun ActionsClassHomeWork
@@ -14,5 +19,24 @@ public class Actions {
 //8- "Double click me" butonunu cift tiklayin
      */
 
+    @Test
+    public void test01() throws InterruptedException {
+        driver.get("http://webdriveruniversity.com/Actions");
 
+        WebElement hover=driver.findElement(By.xpath("//*[text()='Hover Over Me First!']"));
+        actions.moveToElement(hover).perform();
+
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("(//*[text()='Link 1'])[1]")).click();
+        System.out.println(driver.switchTo().alert().getText());
+        driver.switchTo().alert().accept();
+
+        WebElement click=driver.findElement(By.xpath("//*[text()='Click and Hold!']"));
+        actions.clickAndHold(click).perform();
+
+        System.out.println(driver.findElement(By.xpath("//*[@id='click-box']")).getText());
+
+        WebElement doublea=driver.findElement(By.xpath("//h2"));
+        actions.doubleClick(doublea).perform();
+    }
 }
